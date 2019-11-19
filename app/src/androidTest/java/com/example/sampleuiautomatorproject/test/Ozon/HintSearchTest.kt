@@ -8,8 +8,8 @@ class HintSearchTest : OzonTest() {
     fun hintSearch() = with(app) {
         open()
         mainPage.clickSearch()
-        searchActivity.typeToSearch("философия java")
-        searchActivity.checkHintPrice()
-        searchActivity.checkHintTitle()
+        search.typeToSearch(searchText)
+        productInfo.checkPrice(price)
+        productInfo.checkTitle(productTitle)
     }
 }

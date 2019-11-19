@@ -1,22 +1,25 @@
 package com.example.sampleuiautomatorproject.test.Ozon
 
+import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.sampleuiautomatorproject.util.byStringRes
 import org.junit.Test
+import org.junit.runner.RunWith
 
+@RunWith(AndroidJUnit4::class)
 class EmailValidationTest : OzonTest() {
+
+    private val menuProfileSelector = byStringRes("ru.ozon.app.android:id/menu_profile")
 
     @Test
     fun checkEmailValidation() = with(app) {
         open()
-        bottomNavigation.goToProfile()
+        bottomNavigation.goToPage(menuProfileSelector)
         profilePage.clickEmailLogin()
-        //TODO repair this method
-        //setEmail("WrongEmail")
-        //setPassword("password")
-        //clickEnterButton()
-        //checkHintWrongEmail()
-        //setEmail("adeev96@mail.ru")
-        //setPassword("password")
-        //clickEnterButton()
-        //checkHintCorrectEmail()
+        profilePage.setEmail("WrongEmail")
+        profilePage.clickEnterButton()
+        profilePage.checkHintWrongEmail()
+        profilePage.setEmail("adeev96@mail.ru")
+        profilePage.clickEnterButton()
+        profilePage.checkHintCorrectEmail()
     }
 }

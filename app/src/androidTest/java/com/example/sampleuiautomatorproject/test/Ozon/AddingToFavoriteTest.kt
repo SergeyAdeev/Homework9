@@ -1,18 +1,21 @@
 package com.example.sampleuiautomatorproject.test.Ozon
 
+import com.example.sampleuiautomatorproject.util.byStringRes
 import org.junit.Test
 
 class AddingToFavoriteTest : OzonTest() {
+
+    private val menuFavoritesSelector = byStringRes("ru.ozon.app.android:id/menu_favorites")
 
     @Test
     fun addToFavorite() = with(app) {
         open()
         mainPage.clickSearch()
-        searchActivity.typeToSearch("философия java")
-        searchActivity.clickResult()
+        search.typeToSearch(searchText)
+        productInfo.clickResult()
         productPage.clickAddToFavorite()
-        bottomNavigation.goToFavorites()
-        toolbar.checkToolbar()
-        favoritesPage.checkProduct()
+        bottomNavigation.goToPage(menuFavoritesSelector)
+        toolbar.checkToolbar(toolbarName)
+        favoritesPage.checkProduct(productTitle)
     }
 }

@@ -8,9 +8,10 @@ class CheckingRegistrationTest : OzonTest() {
     fun checkRegistration() = with(app) {
         open()
         mainPage.clickSearch()
-        searchActivity.typeToSearch("философия java")
-        searchActivity.clickResult()
-        //TODO finish this method
+        search.typeToSearch(searchText)
+        productInfo.clickResult()
         productPage.scrollToWriteReviewButton()
+        productPage.clickWriteReviewButton()
+        profilePage.checkTitle("Вход или регистрация")
     }
 }

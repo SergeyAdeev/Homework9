@@ -1,11 +1,13 @@
 package com.example.sampleuiautomatorproject.application.Ozon.Pages
 
-import androidx.test.uiautomator.Direction
-import com.example.sampleuiautomatorproject.application.Ozon.Ozon
+import androidx.test.uiautomator.UiScrollable
+import androidx.test.uiautomator.UiSelector
 import com.example.sampleuiautomatorproject.util.byStringRes
+import com.example.sampleuiautomatorproject.util.ext.clickAndWaitnewWindow
 import com.example.sampleuiautomatorproject.util.ext.waitFindObject
 
-class ProductPage : Ozon() {
+
+class ProductPage {
 
     private val writeReviewButtonSelector = byStringRes("ru.ozon.app.android:id/writeReviewBtn")
     private val widgetSelector = byStringRes("ru.ozon.app.android:id/galleryVp")
@@ -19,6 +21,11 @@ class ProductPage : Ozon() {
     }
 
     fun scrollToWriteReviewButton() {
-        writeReviewButtonSelector.waitFindObject().scroll(Direction.DOWN, 1f)
+        val productList = UiScrollable(UiSelector().scrollable(true))
+        productList.scrollTextIntoView("Написать отзыв")
+    }
+
+    fun clickWriteReviewButton() {
+        writeReviewButtonSelector.waitFindObject().clickAndWaitnewWindow()
     }
 }

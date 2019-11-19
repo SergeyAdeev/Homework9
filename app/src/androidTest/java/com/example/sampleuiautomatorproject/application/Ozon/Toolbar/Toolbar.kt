@@ -10,11 +10,10 @@ class Toolbar {
     private val toolbarSelector = byStringRes("ru.ozon.app.android:id/toolbarTb")
     private val favoritesTextViewSelector = byClazz("android.widget.TextView")
 
-    fun checkToolbar() {
-        //TODO abstract Toolbar
+    fun checkToolbar(toolbarName: String) {
         Assert.assertEquals(
-            "Тулбар не совпадает",
-            "Избранное",
+            "Name of toolbar is wrong",
+            toolbarName,
             toolbarSelector.waitFindObject().findObject(favoritesTextViewSelector).text
         )
     }

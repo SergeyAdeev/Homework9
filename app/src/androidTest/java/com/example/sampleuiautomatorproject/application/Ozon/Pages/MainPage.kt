@@ -4,7 +4,6 @@ import com.example.sampleuiautomatorproject.util.byStringRes
 import com.example.sampleuiautomatorproject.util.ext.waitFindObject
 
 class MainPage {
-    //TODO Page Object
 
     private val imageMainPageSelector = byStringRes("ru.ozon.app.android:id/imageView")
     private val searchSelector = byStringRes("ru.ozon.app.android:id/searchTv")

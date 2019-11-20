@@ -15,7 +15,6 @@ open class ProfilePage {
     private val enterButtonSelector = byStringRes("ru.ozon.app.android:id/submitBtn")
     private val titleSelector: BySelector = byStringRes("ru.ozon.app.android:id/titleTv")
 
-
     fun clickEmailLogin() {
         emailLoginButtonSelector.waitFindObject().click()
     }
@@ -33,9 +32,8 @@ open class ProfilePage {
     }
 
     fun checkHintWrongEmail() {
-        //TODO repair this method
         assertEquals(
-            "Подсказка Email не совпадает",
+            "Email hint is wrong",
             "Некорректный формат почты",
             emailInputHintSelector.waitFindObject().text
         )

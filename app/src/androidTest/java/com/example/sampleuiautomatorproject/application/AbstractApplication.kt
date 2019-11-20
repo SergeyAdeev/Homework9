@@ -19,6 +19,6 @@ abstract class AbstractApplication(val packageName: String) {
         assertNotNull(
             "App $packageName is not installed",
             context.packageManager.getLaunchIntentForPackage(packageName)
-            )
+        )
     }
 }

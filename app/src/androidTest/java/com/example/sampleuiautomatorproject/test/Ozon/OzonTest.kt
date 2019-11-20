@@ -1,40 +1,58 @@
 package com.example.sampleuiautomatorproject.test.Ozon
 
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.example.sampleuiautomatorproject.application.Ozon.BottomNavigation.BottomNavigation
-import com.example.sampleuiautomatorproject.application.Ozon.Elements.ProductInfo
-import com.example.sampleuiautomatorproject.application.Ozon.Elements.Search
 import com.example.sampleuiautomatorproject.application.Ozon.Ozon
-import com.example.sampleuiautomatorproject.application.Ozon.Pages.FavoritesPage
-import com.example.sampleuiautomatorproject.application.Ozon.Pages.MainPage
-import com.example.sampleuiautomatorproject.application.Ozon.Pages.ProductPage
-import com.example.sampleuiautomatorproject.application.Ozon.Pages.ProfilePage
-import com.example.sampleuiautomatorproject.application.Ozon.Toolbar.Toolbar
 import com.example.sampleuiautomatorproject.test.AbstractApplicationTest
+import org.junit.Test
 import org.junit.runner.RunWith
 
 @RunWith(AndroidJUnit4::class)
-abstract class OzonTest : AbstractApplicationTest<Ozon>(Ozon()) {
+class OzonTest : AbstractApplicationTest<Ozon>(Ozon()) {
 
-    val mainPage = MainPage()
-    val productPage = ProductPage()
-    val favoritesPage = FavoritesPage()
-    val profilePage = ProfilePage()
+    private fun prepareForTest() = with(app) {
+        //clearCache()
+        open()
+        mainPage.clickSearch()
+        search.typeToSearch(searchText)
+    }
 
-    val bottomNavigation = BottomNavigation()
-    val toolbar = Toolbar()
+    @Test
+    fun hintSearch() = with(app) {
+        prepareForTest()
+        productInfo.checkPrice(price)
+        productInfo.checkTitle(productTitle)
+    }
 
-    val search = Search()
-    val productInfo = ProductInfo()
+    @Test
+    fun addToFavorite() = with(app) {
+        prepareForTest()
+        productInfo.clickResult()
+        productPage.clickAddToFavorite()
+        bottomNavigation.goToPage(menuFavoritesSelector)
+        toolbar.checkToolbar(toolbarName)
+        favoritesPage.checkProduct(productTitle)
+    }
 
-    val searchText = "философия java"
-    val toolbarName = "Избранное"
-    val productTitle = "Философия Java"
-    val price = "1 499 \u20BD"
+    @Test
+    fun checkRegistration() = with(app) {
+        prepareForTest()
+        productInfo.clickResult()
+        productPage.scrollToWriteReviewButton()
+        productPage.clickWriteReviewButton()
+        profilePage.checkTitle(signInTitle)
+    }
 
-    //TODO All tests in one class
-
-    //TODO Repair Before for EmailValidationTest
-
-    //TODO open + search in one method for 3 tests
+    @Test
+    fun checkEmailValidation() = with(app) {
+        open()
+        mainPage.loadContent()
+        bottomNavigation.goToPage(menuProfileSelector)
+        profilePage.clickEmailLogin()
+        profilePage.setEmail(wrongEmail)
+        profilePage.clickEnterButton()
+        profilePage.checkHintWrongEmail()
+        profilePage.setEmail(correctEmail)
+        profilePage.clickEnterButton()
+        profilePage.checkHintCorrectEmail()
+    }
 }

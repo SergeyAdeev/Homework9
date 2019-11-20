@@ -5,7 +5,6 @@ import com.example.sampleuiautomatorproject.util.byStringRes
 import com.example.sampleuiautomatorproject.util.ext.waitFindObject
 import org.junit.Assert
 
-
 class FavoritesPage {
 
     private val titleHintSelector: BySelector = byStringRes("ru.ozon.app.android:id/titleTv")
@@ -17,5 +16,4 @@ class FavoritesPage {
             titleHintSelector.waitFindObject().text
         )
     }
-
 }
